@@ -43,6 +43,12 @@ grails.project.dependency.resolution = {
 
         // runtime 'mysql:mysql-connector-java:5.1.22'
 
+        runtime('org.codehaus.groovy.modules.http-builder:http-builder:0.5.1') {
+            excludes 'xalan'
+            excludes 'xml-apis'
+            excludes 'groovy'
+        }
+
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
     }
 
