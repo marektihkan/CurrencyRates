@@ -3,18 +3,16 @@ package org.currencyrates.quotations
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
-class GoogleQuotationsSpec extends Specification {
+class WhenFetchinQuotationsFromGoogleSpec extends Specification {
     def target = new GoogleQuotations(),
-        // JSON: {"to": "EUR", "rate": 0.7768197, "from": "USD", "v": 0.7768197}
-        response = [from: "USD", to: "EUR", rate: 0.1234567],
         currencies = [USD: Currency.getInstance("USD"), EUR: Currency.getInstance("EUR")]
 
-    def "it builds quotation"() {
+    def "it gets quotations from Google"() {
         when:
-            def quotation = target.buildQuotation(response)
+            def quotation = target.fetch(currencies.USD, currencies.EUR)
         then:
             quotation.base == currencies.USD
             quotation.term == currencies.EUR
-            quotation.rate == 0.1234567
+            quotation.rate != null
     }
 }

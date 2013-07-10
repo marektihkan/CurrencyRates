@@ -17,17 +17,4 @@ class YahooQuotationsSpec extends Specification {
             quotation.term == currencies.EUR
             quotation.rate == 0.1234567
     }
-
-
-    // Integration test
-    def "test converter HTTP"() {
-        when:
-            def quotation = target.fetch(
-                currencies.USD,
-                currencies.EUR)
-        then:
-            quotation.base == currencies.USD
-            quotation.term == currencies.EUR
-            quotation.rate != null
-    }
 }
