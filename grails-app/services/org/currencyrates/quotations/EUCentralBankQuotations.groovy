@@ -11,9 +11,12 @@ class EUCentralBankQuotations {
     def RATES_URL = "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"
 
     RatesCalculator rates
+    Date expiresAt = new Date()
 
     Quotation fetch(Currency base, Currency term) {
-        fetchRates()
+        if (areRatesExpired()) {
+            fetchRates()
+        }
         buildQuotation(base, term)
     }
 
@@ -25,10 +28,20 @@ class EUCentralBankQuotations {
         quotation
     }
 
+    Date getRatesExpirationTime(now = new Date()) {
+        def exprationTime = new Date(now.year, now.month, now.date, 15, 0, 0)
+        now > exprationTime ? exprationTime + 1 : exprationTime
+    }
+
+    boolean areRatesExpired(now = new Date()) {
+        this.expiresAt <= now
+    }
+
     private void fetchRates() {
         def http = new HTTPBuilder(RATES_URL),
             rates = parseRates(http.get([:]))
         this.rates = new RatesCalculator(rates, Currency.getInstance("EUR"))
+        this.expiresAt = getRatesExpirationTime()
     }
 
     private Map parseRates(response) {
