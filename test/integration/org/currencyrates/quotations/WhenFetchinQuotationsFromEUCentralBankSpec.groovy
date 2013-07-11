@@ -11,7 +11,6 @@ class WhenFetchinQuotationsFromEUCentralBankSpec extends Specification {
         when:
             def quotation = target.fetch(currencies.USD, currencies.EUR)
         then:
-            println quotation.rate
             quotation.base == currencies.USD
             quotation.term == currencies.EUR
             quotation.rate != null
