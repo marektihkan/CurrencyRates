@@ -6,7 +6,7 @@ import static groovyx.net.http.Method.*
 
 import org.currencyrates.Quotation
 
-class YahooQuotations {
+class YahooQuotations implements QuotationsSource {
     def SERVICE_URL = "http://finance.yahoo.com/d/quotes.csv"
 
     Quotation fetch(Currency base, Currency term) {

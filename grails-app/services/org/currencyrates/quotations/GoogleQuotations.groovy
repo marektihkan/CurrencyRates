@@ -6,7 +6,7 @@ import static groovyx.net.http.Method.*
 
 import org.currencyrates.Quotation
 
-class GoogleQuotations {
+class GoogleQuotations implements QuotationsSource {
     def SERVICE_URL = "http://rate-exchange.appspot.com/currency"
 
     Quotation get(Currency base, Currency term) {

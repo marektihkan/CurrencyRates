@@ -7,7 +7,7 @@ import static groovyx.net.http.Method.*
 import org.currencyrates.Quotation
 import org.currencyrates.RatesCalculator
 
-class EUCentralBankQuotations {
+class EUCentralBankQuotations implements QuotationsSource {
     def RATES_URL = "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"
 
     RatesCalculator rates
