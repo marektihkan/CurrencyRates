@@ -6,6 +6,10 @@ import spock.lang.Specification
 class EUCentralBankQuotationsSpec extends Specification {
     def target = new EUCentralBankQuotations()
 
+    def "it has identifier"() {
+        expect: target.identifier == "EUCentralBank"
+    }
+
     def "rates are expired"() {
         expect: target.areRatesExpired()
     }

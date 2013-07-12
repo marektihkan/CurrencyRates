@@ -19,7 +19,7 @@ class QuotationsService {
             result = [
                 base: base,
                 term: term,
-                rates: quotations.collect { it.rate },
+                quotations: quotations.collect { [source: it.source, rate: it.rate] },
                 average: calculateAverage(quotations)
             ]
     }

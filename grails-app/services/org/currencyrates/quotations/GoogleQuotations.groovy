@@ -7,7 +7,8 @@ import static groovyx.net.http.Method.*
 import org.currencyrates.Quotation
 
 class GoogleQuotations implements QuotationsSource {
-    def SERVICE_URL = "http://rate-exchange.appspot.com/currency"
+    def SERVICE_URL = "http://rate-exchange.appspot.com/currency",
+        identifier = "Google"
 
     Quotation get(Currency base, Currency term) {
         fetch(base, term)
@@ -25,6 +26,7 @@ class GoogleQuotations implements QuotationsSource {
         quotation.base = Currency.getInstance(response.from)
         quotation.term = Currency.getInstance(response.to)
         quotation.rate = response.rate
+        quotation.source = identifier
         quotation
     }
 }

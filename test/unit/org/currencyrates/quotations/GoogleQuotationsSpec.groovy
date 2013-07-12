@@ -9,6 +9,10 @@ class GoogleQuotationsSpec extends Specification {
         response = [from: "USD", to: "EUR", rate: 0.1234567],
         currencies = [USD: Currency.getInstance("USD"), EUR: Currency.getInstance("EUR")]
 
+    def "it has identifier"() {
+        expect: target.identifier == "Google"
+    }
+
     def "it builds quotation"() {
         when:
             def quotation = target.buildQuotation(response)
@@ -16,5 +20,6 @@ class GoogleQuotationsSpec extends Specification {
             quotation.base == currencies.USD
             quotation.term == currencies.EUR
             quotation.rate == 0.1234567
+            quotation.source == target.identifier
     }
 }

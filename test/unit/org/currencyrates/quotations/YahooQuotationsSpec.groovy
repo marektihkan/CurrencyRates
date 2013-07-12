@@ -9,6 +9,10 @@ class YahooQuotationsSpec extends Specification {
         currencies = [USD: Currency.getInstance("USD"), EUR: Currency.getInstance("EUR")],
         response = [base: currencies.USD, term: currencies.EUR, rate: 0.1234567]
 
+    def "it has identifier"() {
+        expect: target.identifier == "Yahoo"
+    }
+
     def "it builds quotation"() {
         when:
             def quotation = target.buildQuotation(response)
@@ -16,5 +20,6 @@ class YahooQuotationsSpec extends Specification {
             quotation.base == currencies.USD
             quotation.term == currencies.EUR
             quotation.rate == 0.1234567
+            quotation.source == target.identifier
     }
 }

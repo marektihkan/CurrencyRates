@@ -8,7 +8,8 @@ import org.currencyrates.Quotation
 import org.currencyrates.RatesCalculator
 
 class EUCentralBankQuotations implements QuotationsSource {
-    def RATES_URL = "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"
+    def RATES_URL = "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml",
+        identifier = "EUCentralBank"
 
     RatesCalculator rates
     Date expiresAt = new Date()
@@ -25,6 +26,7 @@ class EUCentralBankQuotations implements QuotationsSource {
         quotation.base = base
         quotation.term = term
         quotation.rate = this.rates.calculate(base, term)
+        quotation.source = identifier
         quotation
     }
 
