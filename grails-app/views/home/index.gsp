@@ -4,11 +4,12 @@
 <body>
 	<div class="container">
 		<div class="span12">
-			<h1>Currency Exchange Rates</h1>
+			<h1><g:message code="home.index.title" /></h1>
 			<hr>
-			<h2>Choose currencies</h2>
+			<h2><g:message code="home.index.form.title" /></h2>
 			<form class="form-inline">
-				<label>From:
+				<label>
+					<g:message code="home.index.form.from.label" />
 					<select id="base_currency">
 						<option>EUR</option>
 						<option>USD</option>
@@ -16,7 +17,7 @@
 					</select>
 				</label>
 				<label>
-					To:
+					<g:message code="home.index.form.to.label" />
 					<select id="term_currency">
 						<option>EUR</option>
 						<option>USD</option>
@@ -25,14 +26,20 @@
 				</label>
 			</form>
 			<div class="results">
-				<h2>Results</h2>
+				<h2><g:message code="home.index.results.title" /></h2>
 				<dl class="dl-horizontal">
-					<dt>Base currency</dt>
+					<dt>
+						<g:message code="home.index.results.baseCurrency.label" />
+					</dt>
 					<dd class="base-currency-value"></dd>
-				</dl>
-				<dl class="dl-horizontal">
-					<dt>Term currency</dt>
+					<dt>
+						<g:message code="home.index.results.termCurrency.label" />
+					</dt>
 					<dd class="term-currency-value"></dd>
+					<dt>
+						<g:message code="home.index.results.averageRate.label" />
+					</dt>
+					<dd class="average-rate-value"></dd>
 				</dl>
 			</div>
 		</div>
