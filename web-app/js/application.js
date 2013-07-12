@@ -9,8 +9,18 @@ if (typeof jQuery !== 'undefined') {
 
 	(function($) {
 		$('select#base_currency, select#term_currency').on('change', function() {
-			$('div.results dd.base-currency-value').text($('select#base_currency :selected').text());
-			$('div.results dd.term-currency-value').text($('select#term_currency :selected').text());
+			var formInputs = $('select#base_currency, select#term_currency');
+			formInputs.attr('disabled', 'disabled');
+
+			$.getJSON("/CurrencyRates/quotation", {
+				base: $('select#base_currency :selected').text(),
+				term: $('select#term_currency :selected').text()
+			}, function(data) {
+				formInputs.removeAttr('disabled');
+				$('div.results dd.base-currency-value').text(data.base);
+				$('div.results dd.term-currency-value').text(data.term);
+				$('div.results dd.average-rate-value').text(data.average);
+			});
 		});
 	})(jQuery);
 }
