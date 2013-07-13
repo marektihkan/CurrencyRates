@@ -7,10 +7,10 @@
 			<h1><g:message code="home.index.title" /></h1>
 			<hr>
 			<h2><g:message code="home.index.form.title" /></h2>
-			<form class="form-inline">
+			<g:form name="quotations" url="[controller:'quotation',action:'index']" method="GET" class="form-inline">
 				<label>
 					<g:message code="home.index.form.from.label" />
-					<select id="base_currency">
+					<select id="base_currency" name="base">
 						<option>EUR</option>
 						<option>USD</option>
 						<option>GBP</option>
@@ -18,13 +18,13 @@
 				</label>
 				<label>
 					<g:message code="home.index.form.to.label" />
-					<select id="term_currency">
+					<select id="term_currency" name="term">
 						<option>EUR</option>
 						<option>USD</option>
 						<option>GBP</option>
 					</select>
 				</label>
-			</form>
+			</g:form>
 			<div class="results">
 				<h2><g:message code="home.index.results.title" /></h2>
 				<div class="row">

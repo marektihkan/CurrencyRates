@@ -8,7 +8,13 @@ if (typeof jQuery !== 'undefined') {
 	})(jQuery);
 
 	(function($) {
-		var quotationsUrl = "/CurrencyRates/quotation",
+		var quotationsUrl = "",
+			getQuotationsUrl = function() {
+				if (quotationsUrl === "") {
+					quotationsUrl = $('form#quotations').attr('action');
+				}
+				return quotationsUrl;
+			},
 			disableForm = function() {
 				$('select#base_currency, select#term_currency').attr('disabled', 'disabled');
 			},
@@ -29,12 +35,11 @@ if (typeof jQuery !== 'undefined') {
 				$('div.results dd.term-currency-value').text(data.term);
 				$('div.results dd.average-rate-value').text(data.average);
 				$.each(data.quotations, function(index, quotation) {
-					console.log(quotation.source);
 					$('div.results dd.quotation-source-' + quotation.source).text(quotation.rate);
 				});
 			},
 			fetchQuotations = function() {
-				$.getJSON(quotationsUrl, getFormData(), function(data) {
+				$.getJSON(getQuotationsUrl(), getFormData(), function(data) {
 					enableForm();
 					fillData(data);
 				});
