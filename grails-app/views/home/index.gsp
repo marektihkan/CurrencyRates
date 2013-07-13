@@ -10,11 +10,15 @@
 			<g:form name="quotations" url="[controller:'quotation',action:'index']" method="GET" class="form-inline">
 				<label>
 					<g:message code="home.index.form.from.label" />
-					<g:currencySelect id="base_currency" name="base" />
+					<select id="base_currency" name="base">
+						<g:render template="/shared/currencies" />
+					</select>
 				</label>
 				<label>
 					<g:message code="home.index.form.to.label" />
-					<g:currencySelect id="term_currency" name="term" />
+					<select id="term_currency" name="term">
+						<g:render template="/shared/currencies" />
+					</select>
 				</label>
 			</g:form>
 			<div class="results">

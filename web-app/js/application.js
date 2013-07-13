@@ -23,8 +23,8 @@ if (typeof jQuery !== 'undefined') {
 			},
 			getFormData = function() {
 				return {
-					base: $('select#base_currency :selected').text(),
-					term: $('select#term_currency :selected').text()
+					base: $('select#base_currency :selected').val(),
+					term: $('select#term_currency :selected').val()
 				}
 			}
 			resetResults = function() {
@@ -35,7 +35,7 @@ if (typeof jQuery !== 'undefined') {
 				$('div.results dd.term-currency-value').text(data.term);
 				$('div.results dd.average-rate-value').text(data.average);
 				$.each(data.quotations, function(index, quotation) {
-					$('div.results dd.quotation-source-' + quotation.source).text(quotation.rate);
+					$('div.results dd.quotation-source-' + quotation.source).text(quotation.rate || '-');
 				});
 			},
 			fetchQuotations = function() {
