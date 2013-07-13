@@ -1,5 +1,6 @@
 package org.currencyrates
 
+import grails.plugin.cache.Cacheable
 import org.currencyrates.quotations.*
 
 class QuotationsService {
@@ -9,6 +10,7 @@ class QuotationsService {
             new EUCentralBankQuotations()
         ]
 
+    @Cacheable('quotations')
     Map get(String base, String term) {
         // Validate currencies
         get(Currency.getInstance(base), Currency.getInstance(term))
