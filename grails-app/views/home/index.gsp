@@ -10,19 +10,11 @@
 			<g:form name="quotations" url="[controller:'quotation',action:'index']" method="GET" class="form-inline">
 				<label>
 					<g:message code="home.index.form.from.label" />
-					<select id="base_currency" name="base">
-						<option>EUR</option>
-						<option>USD</option>
-						<option>GBP</option>
-					</select>
+					<g:currencySelect id="base_currency" name="base" />
 				</label>
 				<label>
 					<g:message code="home.index.form.to.label" />
-					<select id="term_currency" name="term">
-						<option>EUR</option>
-						<option>USD</option>
-						<option>GBP</option>
-					</select>
+					<g:currencySelect id="term_currency" name="term" />
 				</label>
 			</g:form>
 			<div class="results">
