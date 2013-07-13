@@ -27,8 +27,9 @@ class QuotationsService {
     }
 
     double calculateAverage(Collection<Quotation> quotations) {
-        def sum = quotations.sum { it.rate },
-            size = quotations.size()
+        def calculatableQuotations = quotations.findAll { it.rate != null },
+            sum = calculatableQuotations.sum { it.rate },
+            size = calculatableQuotations.size()
         sum > 0 ? sum / size : 0
     }
 }

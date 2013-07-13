@@ -15,7 +15,7 @@ class GoogleQuotationsSpec extends Specification {
 
     def "it builds quotation"() {
         when:
-            def quotation = target.buildQuotation(response)
+            def quotation = target.buildQuotation(currencies.USD, currencies.EUR, response)
         then:
             quotation.base == currencies.USD
             quotation.term == currencies.EUR

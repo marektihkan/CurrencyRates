@@ -22,10 +22,8 @@ class EUCentralBankQuotations implements QuotationsSource {
     }
 
     Quotation buildQuotation(base, term) {
-        def quotation = new Quotation()
-        quotation.base = base
-        quotation.term = term
-        quotation.rate = this.rates.calculate(base, term)
+        def quotation = new Quotation(base, term, null)
+        quotation.rate = this.rates.tryCalculate(base, term)
         quotation.source = identifier
         quotation
     }

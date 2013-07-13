@@ -19,6 +19,12 @@ class RatesCalculator {
         termRate / baseRate
     }
 
+    Double tryCalculate(Currency base, Currency term) {
+        try {
+            calculate(base, term)
+        } catch(exception) {}
+    }
+
     private double getRate(Currency currency) {
         if (!rates.containsKey(currency.toString())) {
             throw new NotFoundException("Exchange rate for $currency was not found.")

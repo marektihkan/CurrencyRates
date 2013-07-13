@@ -18,14 +18,11 @@ class GoogleQuotations implements QuotationsSource {
         def http = new HTTPBuilder(SERVICE_URL),
             query = [from: base.toString(), to: term.toString(), q: 1],
             response = http.get(query: query)
-        buildQuotation(response)
+        buildQuotation(base, term, response)
     }
 
-    Quotation buildQuotation(response) {
-        def quotation = new Quotation()
-        quotation.base = Currency.getInstance(response.from)
-        quotation.term = Currency.getInstance(response.to)
-        quotation.rate = response.rate
+    Quotation buildQuotation(base, term, response) {
+        def quotation = new Quotation(base, term, response.rate)
         quotation.source = identifier
         quotation
     }
