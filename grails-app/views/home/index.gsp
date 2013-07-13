@@ -3,7 +3,7 @@
 </head>
 <body>
 	<div class="container">
-		<div class="span12">
+		<div>
 			<h1><g:message code="home.index.title" /></h1>
 			<hr>
 			<h2><g:message code="home.index.form.title" /></h2>
@@ -24,7 +24,7 @@
 			<div class="results">
 				<h2><g:message code="home.index.results.title" /></h2>
 				<div class="row">
-					<div class="span4">
+					<div class="span3">
 						<dl>
 							<dt><g:message code="home.index.results.baseCurrency.label" /></dt>
 							<dd class="base-currency-value currency"></dd>
@@ -32,7 +32,7 @@
 							<dd class="term-currency-value currency"></dd>
 						</dl>
 					</div>
-					<div class="span8">
+					<div class="span5">
 						<dl class="dl-horizontal">
 							<dt><g:message code="quotationSource.Google.title" /></dt>
 							<dd class="quotation-source-Google quotation-source"></dd>

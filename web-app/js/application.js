@@ -1,9 +1,21 @@
 if (typeof jQuery !== 'undefined') {
 	(function($) {
-		$('#spinner').ajaxStart(function() {
-			$(this).fadeIn();
+		var options = {
+				lines: 12,
+				length: 7,
+				width: 5,
+				radius: 15,
+				color: '#000',
+				speed: 1,
+				trail: 100,
+				shadow: true
+			},
+			spinner = new Spinner(options);
+
+		$('.container').ajaxStart(function() {
+			spinner.spin(this);
 		}).ajaxStop(function() {
-			$(this).fadeOut();
+			spinner.stop();
 		});
 	})(jQuery);
 
