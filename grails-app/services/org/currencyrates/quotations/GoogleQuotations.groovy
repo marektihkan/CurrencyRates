@@ -7,14 +7,21 @@ import static groovyx.net.http.Method.*
 
 import org.currencyrates.Quotation
 
+/*
+ * Google quotations source. Provides quotations from Google converter.
+ */
 class GoogleQuotations implements QuotationsSource {
     def SERVICE_URL = "http://rate-exchange.appspot.com/currency",
         identifier = "Google"
 
-    Quotation get(Currency base, Currency term) {
-        fetch(base, term)
-    }
-
+    /*
+     * Fetches quotation from Google converter.
+     *
+     * @param base Base currency.
+     * @param term Term currency.
+     * @return Quotation Quotation for specified currencies from Google
+     * converter.
+     */
     Quotation fetch(Currency base, Currency term) {
         def http = new HTTPBuilder(SERVICE_URL),
             query = [from: base.toString(), to: term.toString(), q: 1],
@@ -22,6 +29,14 @@ class GoogleQuotations implements QuotationsSource {
         buildQuotation(base, term, response)
     }
 
+    /*
+     * Builds new quotation from currencies and response.
+     *
+     * @param base Base currency.
+     * @param term Term currency.
+     * @param response Yahoo response for conversion.
+     * @return Quotation New quotation based on response.
+     */
     Quotation buildQuotation(base, term, response) {
         def quotation = new Quotation(base, term, response.rate)
         quotation.source = identifier

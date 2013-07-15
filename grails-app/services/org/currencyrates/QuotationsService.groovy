@@ -3,6 +3,9 @@ package org.currencyrates
 import grails.plugin.cache.Cacheable
 import org.currencyrates.quotations.*
 
+/*
+ * Service which provides currency quotations from different sources.
+ */
 class QuotationsService {
     def sources = [
             new YahooQuotations(),
@@ -10,6 +13,14 @@ class QuotationsService {
             new EUCentralBankQuotations()
         ]
 
+    /*
+     * Gets all quotations for sources with calculated average. When currencies
+     * doesn't match ISO 4217 currency code it raises InvalidCurrencyException.
+     *
+     * @param base Base currency.
+     * @param term Term currency.
+     * @return Map Map of currencies, quotations and calculated average.
+     */
     @Cacheable('quotations')
     Map get(String base, String term) throws InvalidCurrencyException {
         validateCurrency(base)
@@ -17,6 +28,13 @@ class QuotationsService {
         get(Currency.getInstance(base), Currency.getInstance(term))
     }
 
+    /*
+     * Gets all quotations for sources with calculated average.
+     *
+     * @param base Base currency.
+     * @param term Term currency.
+     * @return Map Map of currencies, quotations and calculated average.
+     */
     Map get(Currency base, Currency term) {
         def quotations = fetchAllQuotations(base, term),
             result = [
@@ -27,6 +45,14 @@ class QuotationsService {
             ]
     }
 
+    /*
+     * Fetches all quotations for sources. Whenever possible it tries to get
+     * cached values from database.
+     *
+     * @param base Base currency.
+     * @param term Term currency.
+     * @return Collection<Quotation> List of quotations for each source.
+     */
     Collection<Quotation> fetchAllQuotations(Currency base, Currency term) {
         def cachedQuotations = getCachedQuotations(base, term),
             missingSources = getMissingSources(cachedQuotations),
@@ -34,6 +60,12 @@ class QuotationsService {
         cachedQuotations + missingQuotations
     }
 
+    /*
+     * Calculates average rate from list of quotations.
+     *
+     * @param quotations List of quotations where average rate is calculated.
+     * @return double Average rate of quotations.
+     */
     double calculateAverage(Collection<Quotation> quotations) {
         def calculatableQuotations = quotations.findAll { it.rate != null },
             sum = calculatableQuotations.sum { it.rate },
