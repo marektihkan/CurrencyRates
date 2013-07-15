@@ -11,8 +11,9 @@ class QuotationsService {
         ]
 
     @Cacheable('quotations')
-    Map get(String base, String term) {
-        // Validate currencies
+    Map get(String base, String term) throws InvalidCurrencyException {
+        validateCurrency(base)
+        validateCurrency(term)
         get(Currency.getInstance(base), Currency.getInstance(term))
     }
 
@@ -57,5 +58,11 @@ class QuotationsService {
         sources.findAll { !cachedSources.contains(it.identifier) }
     }
 
-
+    private boolean validateCurrency(String code) throws InvalidCurrencyException {
+        try {
+            Currency.getInstance(code)
+        } catch (exception) {
+            throw new InvalidCurrencyException("$code is not a currency.")
+        }
+    }
 }

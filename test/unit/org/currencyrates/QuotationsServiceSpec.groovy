@@ -19,4 +19,18 @@ class QuotationsServiceSpec extends Specification {
     def "it return zero on calculating average rate without sources"() {
         expect: target.calculateAverage([]) == 0
     }
+
+    def "it raises exception on getting quotations when base currency is invalid"() {
+        when: target.get("ABC", "GBP")
+        then:
+            InvalidCurrencyException exception = thrown()
+            exception.message == "ABC is not a currency."
+    }
+
+    def "it raises exception on getting quotations when term currency is invalid"() {
+        when: target.get("GBP", "ABC")
+        then:
+            InvalidCurrencyException exception = thrown()
+            exception.message == "ABC is not a currency."
+    }
 }
