@@ -27,21 +27,27 @@
 					<div class="span3">
 						<dl>
 							<dt><g:message code="home.index.results.baseCurrency.label" /></dt>
-							<dd class="base-currency-value currency"></dd>
+							<dd class="base-currency value currency"></dd>
 							<dt><g:message code="home.index.results.termCurrency.label" /></dt>
-							<dd class="term-currency-value currency"></dd>
+							<dd class="term-currency value currency"></dd>
 						</dl>
 					</div>
-					<div class="span5">
+					<div class="span6">
 						<dl class="dl-horizontal">
 							<dt><g:message code="quotationSource.Google.title" /></dt>
-							<dd class="quotation-source-Google quotation-source"></dd>
+							<dd class="quotation-source-Google quotation-source">
+								<span class="value"></span>
+							</dd>
 							<dt><g:message code="quotationSource.Yahoo.title" /></dt>
-							<dd class="quotation-source-Yahoo quotation-source"></dd>
+							<dd class="quotation-source-Yahoo quotation-source">
+								<span class="value"></span>
+							</dd>
 							<dt><g:message code="quotationSource.EUCentralBank.title" /></dt>
-							<dd class="quotation-source-EUCentralBank quotation-source"></dd>
+							<dd class="quotation-source-EUCentralBank quotation-source">
+								<span class="value"></span>
+							</dd>
 							<dt><g:message code="home.index.results.averageRate.label" /></dt>
-							<dd class="average-rate-value"></dd>
+							<dd class="average-rate value"></dd>
 						</dl>
 					</div>
 				</div>

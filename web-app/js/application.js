@@ -40,14 +40,17 @@ if (typeof jQuery !== 'undefined') {
 				}
 			}
 			resetResults = function() {
-				$('div.results dd').text('-');
+				$('div.results .value').text('-');
+				$('div.results time').remove();
 			},
 			fillData = function(data) {
-				$('div.results dd.base-currency-value').text(data.base);
-				$('div.results dd.term-currency-value').text(data.term);
-				$('div.results dd.average-rate-value').text(data.average);
+				$('div.results dd.base-currency.value').text(data.base);
+				$('div.results dd.term-currency.value').text(data.term);
+				$('div.results dd.average-rate.value').text(data.average);
 				$.each(data.quotations, function(index, quotation) {
-					$('div.results dd.quotation-source-' + quotation.source).text(quotation.rate || '-');
+					var source = $('div.results dd.quotation-source-' + quotation.source);
+					$('.value', source).text(quotation.rate || '-');
+					source.append($('<time></time>').addClass('muted').attr('datetime', quotation.updatedAt).timeago());
 				});
 			},
 			fetchQuotations = function() {
