@@ -12,7 +12,8 @@ class EUCentralBankQuotations implements QuotationsSource {
         identifier = "EUCentralBank"
 
     RatesCalculator rates
-    Date expiresAt = new Date()
+    def expiresAt = new Date()
+    def updatedAt = new Date()
 
     Quotation fetch(Currency base, Currency term) {
         if (areRatesExpired()) {
@@ -25,6 +26,8 @@ class EUCentralBankQuotations implements QuotationsSource {
         def quotation = new Quotation(base, term, null)
         quotation.rate = this.rates.tryCalculate(base, term)
         quotation.source = identifier
+        quotation.updatedAt = this.updatedAt
+        quotation.expiresAt = this.expiresAt
         quotation
     }
 
@@ -42,6 +45,7 @@ class EUCentralBankQuotations implements QuotationsSource {
             rates = parseRates(http.get([:]))
         this.rates = new RatesCalculator(rates, Currency.getInstance("EUR"))
         this.expiresAt = getRatesExpirationTime()
+        this.updatedAt = new Date()
     }
 
     private Map parseRates(response) {

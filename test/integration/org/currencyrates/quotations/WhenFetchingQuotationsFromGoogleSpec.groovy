@@ -3,11 +3,11 @@ package org.currencyrates.quotations
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
-class WhenFetchinQuotationsFromEUCentralBankSpec extends Specification {
-    def target = new EUCentralBankQuotations(),
+class WhenFetchingQuotationsFromGoogleSpec extends Specification {
+    def target = new GoogleQuotations(),
         currencies = [USD: Currency.getInstance("USD"), EUR: Currency.getInstance("EUR")]
 
-    def "it gets quotations from EU Central Bank"() {
+    def "it gets quotations from Google"() {
         when:
             def quotation = target.fetch(currencies.USD, currencies.EUR)
         then:

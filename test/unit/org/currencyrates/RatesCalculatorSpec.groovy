@@ -29,7 +29,7 @@ class RatesCalculatorSpec extends Specification {
         then: rate == 1.0d / rates.GBP
     }
 
-    def "it throws exception when rate is not found base"() {
+    def "it throws exception on calculation when rate is not found for base"() {
         given: def target = new RatesCalculator(rates)
         when: def rate = target.calculate(Currency.getInstance("AUD"), currencies.GBP)
         then:
@@ -37,11 +37,23 @@ class RatesCalculatorSpec extends Specification {
             exception.message == "Exchange rate for AUD was not found."
     }
 
-    def "it throws exception when rate is not found term"() {
+    def "it throws exception on calculation when rate is not found for term"() {
         given: def target = new RatesCalculator(rates)
         when: def rate = target.calculate(currencies.GBP, Currency.getInstance("AUD"))
         then:
             NotFoundException exception = thrown()
             exception.message == "Exchange rate for AUD was not found."
+    }
+
+    def "it returns null on handled calculation when rate is not found for base"() {
+        given: def target = new RatesCalculator(rates)
+        when: def rate = target.tryCalculate(Currency.getInstance("AUD"), currencies.GBP)
+        then: rate == null
+    }
+
+    def "it returns null on handled calculation when rate is not found for term"() {
+        given: def target = new RatesCalculator(rates)
+        when: def rate = target.tryCalculate(currencies.GBP, Currency.getInstance("AUD"))
+        then: rate == null
     }
 }

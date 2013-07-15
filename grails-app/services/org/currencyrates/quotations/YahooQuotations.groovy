@@ -1,5 +1,6 @@
 package org.currencyrates.quotations
 
+import groovy.time.*
 import groovyx.net.http.*
 import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
@@ -19,11 +20,12 @@ class YahooQuotations implements QuotationsSource {
     }
 
     Quotation buildQuotation(response) {
-        def quotation = new Quotation()
-        quotation.base = response.base
-        quotation.term = response.term
-        quotation.rate = response.rate
+        def quotation = new Quotation(response.base, response.term, response.rate)
         quotation.source = identifier
+        quotation.updatedAt = new Date()
+        use (TimeCategory) {
+            quotation.expiresAt = 10.minutes.from.now
+        }
         quotation
     }
 }

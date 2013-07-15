@@ -21,5 +21,7 @@ class GoogleQuotationsSpec extends Specification {
             quotation.term == currencies.EUR
             quotation.rate == 0.1234567
             quotation.source == target.identifier
+            quotation.expiresAt != null
+            quotation.updatedAt != null
     }
 }

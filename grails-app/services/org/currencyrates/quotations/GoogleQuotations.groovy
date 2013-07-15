@@ -1,5 +1,6 @@
 package org.currencyrates.quotations
 
+import groovy.time.*
 import groovyx.net.http.*
 import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
@@ -24,6 +25,10 @@ class GoogleQuotations implements QuotationsSource {
     Quotation buildQuotation(base, term, response) {
         def quotation = new Quotation(base, term, response.rate)
         quotation.source = identifier
+        quotation.updatedAt = new Date()
+        use (TimeCategory) {
+            quotation.expiresAt = 10.minutes.from.now
+        }
         quotation
     }
 }
